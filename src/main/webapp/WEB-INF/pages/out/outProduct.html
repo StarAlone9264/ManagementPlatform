@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>新增文档 - 光年(Light Year Admin V4)后台管理系统模板</title>
+<link rel="icon" href="favicon.ico" type="image/ico">
+<meta name="keywords" content="LightYear,LightYearAdmin,光年,后台模板,后台管理系统,光年HTML模板">
+<meta name="description" content="Light Year Admin V4是一个后台管理系统的HTML模板，基于Bootstrap v4.4.1。">
+<meta name="author" content="yinqi">
+<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/css/materialdesignicons.min.css" rel="stylesheet">
+<!--标签插件-->
+<link rel="stylesheet" href="/static/js/jquery-tagsinput/jquery.tagsinput.min.css">
+<link href="/static/css/style.min.css" rel="stylesheet">
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/perfect-scrollbar.min.js"></script>
+<!--标签插件-->
+<script src="/static/js/jquery-tagsinput/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="/static/js/main.min.js"></script>
+<script type="application/javascript" src="/static/js/WdatePicker.js"></script>
+<script type="application/javascript" src="/static/js/common.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+</head>
+
+<body>
+<div class="container-fluid p-t-15">
+  
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <form class="search-bar ml-md-auto" method="post" role="form">
+            <a href="#" id="click1" class="btn btn-warning m-r-5">非模板</a>
+            <a href="#" onclick="formSubmit('/outProduct/printHSSF','_self');" class="btn btn-primary m-r-5">模板1</a>
+            <a href="#" onclick="formSubmit('/outProduct/printXSSF','_self');" class="btn btn-success m-r-5">模板2</a>
+            <input type="hidden" name="search_field" id="search-field" value="title"/>
+            <div class="input-group ml-md-auto">
+              <div class="input-group-prepend">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" id="search-btn">标题
+                </button>
+                <div>出货表月统计</div>
+                <div class="dropdown-menu" style="">
+                  <a class="dropdown-item" href="#!" data-field="title">船期</a>
+                </div>
+              </div>
+              <input type="text" style="width:auto;" name="inputDate" value="2018-06"
+                     onclick="WdatePicker({el:this,isShowOthers:true,dateFmt:'yyyy-MM'});"/>
+              <input type="hidden" name="xlsName">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+  $('#click1').confirm({
+    title: '请填写表名称',
+    content: '<input type="text" name="str" placeholder="请输入...">',
+    buttons: {
+      ok: function (){
+        var name = $('input[name="str"]').val();
+        console.log(name)
+        $('input[name="xlsName"]').val(name);
+        console.log($('input[name="xlsName"]').val());
+        formSubmit('/outProduct/print','_self');
+      }
+    }
+  })
+</script>
+</html>

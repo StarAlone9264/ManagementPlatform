@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deer.managementPlatform.dao.ExportProductCMapper">
+
+    <resultMap type="com.deer.managementPlatform.entity.ExportProductC" id="ExportProductCMap">
+        <result property="exportProductId" column="EXPORT_PRODUCT_ID" jdbcType="VARCHAR"/>
+        <result property="contractProductId" column="CONTRACT_PRODUCT_ID" jdbcType="VARCHAR"/>
+        <result property="exportId" column="EXPORT_ID" jdbcType="VARCHAR"/>
+        <result property="factoryId" column="FACTORY_ID" jdbcType="VARCHAR"/>
+        <result property="contractId" column="CONTRACT_ID" jdbcType="VARCHAR"/>
+        <result property="contractNo" column="CONTRACT_NO" jdbcType="VARCHAR"/>
+        <result property="productName" column="PRODUCT_NAME" jdbcType="VARCHAR"/>
+        <result property="productNo" column="PRODUCT_NO" jdbcType="VARCHAR"/>
+        <result property="productImage" column="PRODUCT_IMAGE" jdbcType="VARCHAR"/>
+        <result property="productDesc" column="PRODUCT_DESC" jdbcType="VARCHAR"/>
+        <result property="loadingRate" column="LOADING_RATE" jdbcType="VARCHAR"/>
+        <result property="packingUnit" column="PACKING_UNIT" jdbcType="VARCHAR"/>
+        <result property="cnumber" column="CNUMBER" jdbcType="INTEGER"/>
+        <result property="outNumber" column="OUT_NUMBER" jdbcType="INTEGER"/>
+        <result property="finished" column="FINISHED" jdbcType="INTEGER"/>
+        <result property="grossWeight" column="GROSS_WEIGHT" jdbcType="FLOAT"/>
+        <result property="netWeight" column="NET_WEIGHT" jdbcType="FLOAT"/>
+        <result property="sizeLenght" column="SIZE_LENGHT" jdbcType="FLOAT"/>
+        <result property="sizeWidth" column="SIZE_WIDTH" jdbcType="FLOAT"/>
+        <result property="sizeHeight" column="SIZE_HEIGHT" jdbcType="FLOAT"/>
+        <result property="productRequest" column="PRODUCT_REQUEST" jdbcType="VARCHAR"/>
+        <result property="factory" column="FACTORY" jdbcType="VARCHAR"/>
+        <result property="price" column="PRICE" jdbcType="FLOAT"/>
+        <result property="amount" column="AMOUNT" jdbcType="FLOAT"/>
+        <result property="cunit" column="CUNIT" jdbcType="VARCHAR"/>
+        <result property="boxNum" column="BOX_NUM" jdbcType="INTEGER"/>
+        <result property="exPrice" column="EX_PRICE" jdbcType="FLOAT"/>
+        <result property="exUnit" column="EX_UNIT" jdbcType="VARCHAR"/>
+        <result property="noTax" column="NO_TAX" jdbcType="FLOAT"/>
+        <result property="tax" column="TAX" jdbcType="FLOAT"/>
+        <result property="costPrice" column="COST_PRICE" jdbcType="FLOAT"/>
+        <result property="costTax" column="COST_TAX" jdbcType="FLOAT"/>
+        <result property="accessories" column="ACCESSORIES" jdbcType="INTEGER"/>
+        <result property="orderNo" column="ORDER_NO" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ExportProductCMap">
+        select
+          EXPORT_PRODUCT_ID, CONTRACT_PRODUCT_ID, EXPORT_ID, FACTORY_ID, CONTRACT_ID, CONTRACT_NO, PRODUCT_NAME, PRODUCT_NO, PRODUCT_IMAGE, PRODUCT_DESC, LOADING_RATE, PACKING_UNIT, CNUMBER, OUT_NUMBER, FINISHED, GROSS_WEIGHT, NET_WEIGHT, SIZE_LENGHT, SIZE_WIDTH, SIZE_HEIGHT, PRODUCT_REQUEST, FACTORY, PRICE, AMOUNT, CUNIT, BOX_NUM, EX_PRICE, EX_UNIT, NO_TAX, TAX, COST_PRICE, COST_TAX, ACCESSORIES, ORDER_NO
+        from EXPORT_PRODUCT_C
+        where EXPORT_PRODUCT_ID = #{exportProductId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ExportProductCMap">
+        select
+          EXPORT_PRODUCT_ID, CONTRACT_PRODUCT_ID, EXPORT_ID, FACTORY_ID, CONTRACT_ID, CONTRACT_NO, PRODUCT_NAME, PRODUCT_NO, PRODUCT_IMAGE, PRODUCT_DESC, LOADING_RATE, PACKING_UNIT, CNUMBER, OUT_NUMBER, FINISHED, GROSS_WEIGHT, NET_WEIGHT, SIZE_LENGHT, SIZE_WIDTH, SIZE_HEIGHT, PRODUCT_REQUEST, FACTORY, PRICE, AMOUNT, CUNIT, BOX_NUM, EX_PRICE, EX_UNIT, NO_TAX, TAX, COST_PRICE, COST_TAX, ACCESSORIES, ORDER_NO
+        from EXPORT_PRODUCT_C
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="ExportProductCMap">
+        select
+          EXPORT_PRODUCT_ID, CONTRACT_PRODUCT_ID, EXPORT_ID, FACTORY_ID, CONTRACT_ID, CONTRACT_NO, PRODUCT_NAME, PRODUCT_NO, PRODUCT_IMAGE, PRODUCT_DESC, LOADING_RATE, PACKING_UNIT, CNUMBER, OUT_NUMBER, FINISHED, GROSS_WEIGHT, NET_WEIGHT, SIZE_LENGHT, SIZE_WIDTH, SIZE_HEIGHT, PRODUCT_REQUEST, FACTORY, PRICE, AMOUNT, CUNIT, BOX_NUM, EX_PRICE, EX_UNIT, NO_TAX, TAX, COST_PRICE, COST_TAX, ACCESSORIES, ORDER_NO
+        from EXPORT_PRODUCT_C
+        <where>
+            <if test="exportProductId != null">
+                and EXPORT_PRODUCT_ID = #{exportProductId}
+            </if>
+            <if test="contractProductId != null">
+                and CONTRACT_PRODUCT_ID = #{contractProductId}
+            </if>
+            <if test="exportId != null">
+                and EXPORT_ID = #{exportId}
+            </if>
+            <if test="factoryId != null">
+                and FACTORY_ID = #{factoryId}
+            </if>
+            <if test="contractId != null">
+                and CONTRACT_ID = #{contractId}
+            </if>
+            <if test="contractNo != null">
+                and CONTRACT_NO = #{contractNo}
+            </if>
+            <if test="productName != null">
+                and PRODUCT_NAME = #{productName}
+            </if>
+            <if test="productNo != null">
+                and PRODUCT_NO = #{productNo}
+            </if>
+            <if test="productImage != null">
+                and PRODUCT_IMAGE = #{productImage}
+            </if>
+            <if test="productDesc != null">
+                and PRODUCT_DESC = #{productDesc}
+            </if>
+            <if test="loadingRate != null">
+                and LOADING_RATE = #{loadingRate}
+            </if>
+            <if test="packingUnit != null">
+                and PACKING_UNIT = #{packingUnit}
+            </if>
+            <if test="cnumber != null">
+                and CNUMBER = #{cnumber}
+            </if>
+            <if test="outNumber != null">
+                and OUT_NUMBER = #{outNumber}
+            </if>
+            <if test="finished != null and finished != ''">
+                and FINISHED = #{finished}
+            </if>
+            <if test="grossWeight != null">
+                and GROSS_WEIGHT = #{grossWeight}
+            </if>
+            <if test="netWeight != null">
+                and NET_WEIGHT = #{netWeight}
+            </if>
+            <if test="sizeLenght != null">
+                and SIZE_LENGHT = #{sizeLenght}
+            </if>
+            <if test="sizeWidth != null">
+                and SIZE_WIDTH = #{sizeWidth}
+            </if>
+            <if test="sizeHeight != null">
+                and SIZE_HEIGHT = #{sizeHeight}
+            </if>
+            <if test="productRequest != null">
+                and PRODUCT_REQUEST = #{productRequest}
+            </if>
+            <if test="factory != null">
+                and FACTORY = #{factory}
+            </if>
+            <if test="price != null">
+                and PRICE = #{price}
+            </if>
+            <if test="amount != null">
+                and AMOUNT = #{amount}
+            </if>
+            <if test="cunit != null">
+                and CUNIT = #{cunit}
+            </if>
+            <if test="boxNum != null">
+                and BOX_NUM = #{boxNum}
+            </if>
+            <if test="exPrice != null">
+                and EX_PRICE = #{exPrice}
+            </if>
+            <if test="exUnit != null">
+                and EX_UNIT = #{exUnit}
+            </if>
+            <if test="noTax != null">
+                and NO_TAX = #{noTax}
+            </if>
+            <if test="tax != null">
+                and TAX = #{tax}
+            </if>
+            <if test="costPrice != null">
+                and COST_PRICE = #{costPrice}
+            </if>
+            <if test="costTax != null">
+                and COST_TAX = #{costTax}
+            </if>
+            <if test="accessories != null and accessories != ''">
+                and ACCESSORIES = #{accessories}
+            </if>
+            <if test="orderNo != null">
+                and ORDER_NO = #{orderNo}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <!--<insert id="insert" keyProperty="exportProductId" useGeneratedKeys="true">
+        insert into WWT.EXPORT_PRODUCT_C(CONTRACT_PRODUCT_ID, EXPORT_ID, FACTORY_ID, CONTRACT_ID, CONTRACT_NO, PRODUCT_NAME, PRODUCT_NO, PRODUCT_IMAGE, PRODUCT_DESC, LOADING_RATE, PACKING_UNIT, CNUMBER, OUT_NUMBER, FINISHED, GROSS_WEIGHT, NET_WEIGHT, SIZE_LENGHT, SIZE_WIDTH, SIZE_HEIGHT, PRODUCT_REQUEST, FACTORY, PRICE, AMOUNT, CUNIT, BOX_NUM, EX_PRICE, EX_UNIT, NO_TAX, TAX, COST_PRICE, COST_TAX, ACCESSORIES, ORDER_NO)
+        values (#{contractProductId}, #{exportId}, #{factoryId}, #{contractId}, #{contractNo}, #{productName}, #{productNo}, #{productImage}, #{productDesc}, #{loadingRate}, #{packingUnit}, #{cnumber}, #{outNumber}, #{finished}, #{grossWeight}, #{netWeight}, #{sizeLenght}, #{sizeWidth}, #{sizeHeight}, #{productRequest}, #{factory}, #{price}, #{amount}, #{cunit}, #{boxNum}, #{exPrice}, #{exUnit}, #{noTax}, #{tax}, #{costPrice}, #{costTax}, #{accessories}, #{orderNo})
+    </insert>-->
+    <insert id="insert" parameterType="com.deer.managementPlatform.entity.ExportProductC">
+        insert into EXPORT_PRODUCT_C(EXPORT_PRODUCT_ID, EXPORT_ID, FACTORY_ID, CONTRACT_ID, PRODUCT_NO,PACKING_UNIT,PRICE, BOX_NUM, CNUMBER  )
+        values(#{exportProductId}, #{exportId}, #{factoryId}, #{contractId}, #{productNo},#{packingUnit},#{price},#{boxNum}, #{cnumber})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="exportProductId" useGeneratedKeys="true">
+        insert into EXPORT_PRODUCT_C(CONTRACT_PRODUCT_ID, EXPORT_ID, FACTORY_ID, CONTRACT_ID, CONTRACT_NO, PRODUCT_NAME, PRODUCT_NO, PRODUCT_IMAGE, PRODUCT_DESC, LOADING_RATE, PACKING_UNIT, CNUMBER, OUT_NUMBER, FINISHED, GROSS_WEIGHT, NET_WEIGHT, SIZE_LENGHT, SIZE_WIDTH, SIZE_HEIGHT, PRODUCT_REQUEST, FACTORY, PRICE, AMOUNT, CUNIT, BOX_NUM, EX_PRICE, EX_UNIT, NO_TAX, TAX, COST_PRICE, COST_TAX, ACCESSORIES, ORDER_NO)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.contractProductId}, #{entity.exportId}, #{entity.factoryId}, #{entity.contractId}, #{entity.contractNo}, #{entity.productName}, #{entity.productNo}, #{entity.productImage}, #{entity.productDesc}, #{entity.loadingRate}, #{entity.packingUnit}, #{entity.cnumber}, #{entity.outNumber}, #{entity.finished}, #{entity.grossWeight}, #{entity.netWeight}, #{entity.sizeLenght}, #{entity.sizeWidth}, #{entity.sizeHeight}, #{entity.productRequest}, #{entity.factory}, #{entity.price}, #{entity.amount}, #{entity.cunit}, #{entity.boxNum}, #{entity.exPrice}, #{entity.exUnit}, #{entity.noTax}, #{entity.tax}, #{entity.costPrice}, #{entity.costTax}, #{entity.accessories}, #{entity.orderNo})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="exportProductId" useGeneratedKeys="true">
+        insert into EXPORT_PRODUCT_C(CONTRACT_PRODUCT_ID, EXPORT_ID, FACTORY_ID, CONTRACT_ID, CONTRACT_NO, PRODUCT_NAME, PRODUCT_NO, PRODUCT_IMAGE, PRODUCT_DESC, LOADING_RATE, PACKING_UNIT, CNUMBER, OUT_NUMBER, FINISHED, GROSS_WEIGHT, NET_WEIGHT, SIZE_LENGHT, SIZE_WIDTH, SIZE_HEIGHT, PRODUCT_REQUEST, FACTORY, PRICE, AMOUNT, CUNIT, BOX_NUM, EX_PRICE, EX_UNIT, NO_TAX, TAX, COST_PRICE, COST_TAX, ACCESSORIES, ORDER_NO)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.contractProductId}, #{entity.exportId}, #{entity.factoryId}, #{entity.contractId}, #{entity.contractNo}, #{entity.productName}, #{entity.productNo}, #{entity.productImage}, #{entity.productDesc}, #{entity.loadingRate}, #{entity.packingUnit}, #{entity.cnumber}, #{entity.outNumber}, #{entity.finished}, #{entity.grossWeight}, #{entity.netWeight}, #{entity.sizeLenght}, #{entity.sizeWidth}, #{entity.sizeHeight}, #{entity.productRequest}, #{entity.factory}, #{entity.price}, #{entity.amount}, #{entity.cunit}, #{entity.boxNum}, #{entity.exPrice}, #{entity.exUnit}, #{entity.noTax}, #{entity.tax}, #{entity.costPrice}, #{entity.costTax}, #{entity.accessories}, #{entity.orderNo})
+        </foreach>
+        on duplicate key update
+         CONTRACT_PRODUCT_ID = values(CONTRACT_PRODUCT_ID) , EXPORT_ID = values(EXPORT_ID) , FACTORY_ID = values(FACTORY_ID) , CONTRACT_ID = values(CONTRACT_ID) , CONTRACT_NO = values(CONTRACT_NO) , PRODUCT_NAME = values(PRODUCT_NAME) , PRODUCT_NO = values(PRODUCT_NO) , PRODUCT_IMAGE = values(PRODUCT_IMAGE) , PRODUCT_DESC = values(PRODUCT_DESC) , LOADING_RATE = values(LOADING_RATE) , PACKING_UNIT = values(PACKING_UNIT) , CNUMBER = values(CNUMBER) , OUT_NUMBER = values(OUT_NUMBER) , FINISHED = values(FINISHED) , GROSS_WEIGHT = values(GROSS_WEIGHT) , NET_WEIGHT = values(NET_WEIGHT) , SIZE_LENGHT = values(SIZE_LENGHT) , SIZE_WIDTH = values(SIZE_WIDTH) , SIZE_HEIGHT = values(SIZE_HEIGHT) , PRODUCT_REQUEST = values(PRODUCT_REQUEST) , FACTORY = values(FACTORY) , PRICE = values(PRICE) , AMOUNT = values(AMOUNT) , CUNIT = values(CUNIT) , BOX_NUM = values(BOX_NUM) , EX_PRICE = values(EX_PRICE) , EX_UNIT = values(EX_UNIT) , NO_TAX = values(NO_TAX) , TAX = values(TAX) , COST_PRICE = values(COST_PRICE) , COST_TAX = values(COST_TAX) , ACCESSORIES = values(ACCESSORIES) , ORDER_NO = values(ORDER_NO)     </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update EXPORT_PRODUCT_C
+        <set>
+            <if test="contractProductId != null">
+                CONTRACT_PRODUCT_ID = #{contractProductId},
+            </if>
+            <if test="exportId != null">
+                EXPORT_ID = #{exportId},
+            </if>
+            <if test="factoryId != null">
+                FACTORY_ID = #{factoryId},
+            </if>
+            <if test="contractId != null">
+                CONTRACT_ID = #{contractId},
+            </if>
+            <if test="contractNo != null">
+                CONTRACT_NO = #{contractNo},
+            </if>
+            <if test="productName != null">
+                PRODUCT_NAME = #{productName},
+            </if>
+            <if test="productNo != null">
+                PRODUCT_NO = #{productNo},
+            </if>
+            <if test="productImage != null">
+                PRODUCT_IMAGE = #{productImage},
+            </if>
+            <if test="productDesc != null">
+                PRODUCT_DESC = #{productDesc},
+            </if>
+            <if test="loadingRate != null">
+                LOADING_RATE = #{loadingRate},
+            </if>
+            <if test="packingUnit != null">
+                PACKING_UNIT = #{packingUnit},
+            </if>
+            <if test="cnumber != null">
+                CNUMBER = #{cnumber},
+            </if>
+            <if test="outNumber != null">
+                OUT_NUMBER = #{outNumber},
+            </if>
+            <if test="finished != null and finished != ''">
+                FINISHED = #{finished},
+            </if>
+            <if test="grossWeight != null">
+                GROSS_WEIGHT = #{grossWeight},
+            </if>
+            <if test="netWeight != null">
+                NET_WEIGHT = #{netWeight},
+            </if>
+            <if test="sizeLenght != null">
+                SIZE_LENGHT = #{sizeLenght},
+            </if>
+            <if test="sizeWidth != null">
+                SIZE_WIDTH = #{sizeWidth},
+            </if>
+            <if test="sizeHeight != null">
+                SIZE_HEIGHT = #{sizeHeight},
+            </if>
+            <if test="productRequest != null">
+                PRODUCT_REQUEST = #{productRequest},
+            </if>
+            <if test="factory != null">
+                FACTORY = #{factory},
+            </if>
+            <if test="price != null">
+                PRICE = #{price},
+            </if>
+            <if test="amount != null">
+                AMOUNT = #{amount},
+            </if>
+            <if test="cunit != null">
+                CUNIT = #{cunit},
+            </if>
+            <if test="boxNum != null">
+                BOX_NUM = #{boxNum},
+            </if>
+            <if test="exPrice != null">
+                EX_PRICE = #{exPrice},
+            </if>
+            <if test="exUnit != null">
+                EX_UNIT = #{exUnit},
+            </if>
+            <if test="noTax != null">
+                NO_TAX = #{noTax},
+            </if>
+            <if test="tax != null">
+                TAX = #{tax},
+            </if>
+            <if test="costPrice != null">
+                COST_PRICE = #{costPrice},
+            </if>
+            <if test="costTax != null">
+                COST_TAX = #{costTax},
+            </if>
+            <if test="accessories != null and accessories != ''">
+                ACCESSORIES = #{accessories},
+            </if>
+            <if test="orderNo != null">
+                ORDER_NO = #{orderNo},
+            </if>
+        </set>
+        where EXPORT_PRODUCT_ID = #{exportProductId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from EXPORT_PRODUCT_C where EXPORT_PRODUCT_ID = #{exportProductId}
+    </delete>
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.deer.managementPlatform.dao.OutProductMapper">
+
+    <resultMap id="outProductRM" type="com.deer.managementPlatform.entity.OutProductVO">
+
+    <result column="CUSTOM_NAME" property="customName"/>
+
+    <result column="CONTRACT_NO" property="contractNo"/>
+
+    <result column="PRODUCT_NO" property="productNo"/>
+
+    <result column="CNUMBER" property="cnumber"/>
+
+    <result column="FACTORY_NAME" property="factoryName"/>
+
+    <result column="DELIVERY_PERIOD" property="deliveryPeriod"/>
+
+    <result column="SHIP_TIME" property="shipTime"/>
+
+    <result column="TRADE_TERMS" property="tradeTerms"/>
+
+</resultMap>
+
+    <!-- 按船期查询某个月的购销合同统计 -->
+
+    <select id="find" resultMap="outProductRM" parameterType="string">
+        select c.custom_name,c.contract_no,to_char(c.delivery_period,'yyyy-MM-dd') as delivery_period,to_char(c.ship_time,'yyyy-MM-dd') as ship_time,cp.product_no,concat(cp.cnumber,cp.packing_unit) as cnumber
+        from (select contract_id,custom_name,contract_no,delivery_period,ship_time from contract_c) c left join (select contract_id,product_no,cnumber,packing_unit from contract_product_c) cp on c.contract_id=cp.contract_id
+        where to_char(c.ship_time,'yyyy-MM') = #{inputDate}
+    </select>
+
+</mapper>

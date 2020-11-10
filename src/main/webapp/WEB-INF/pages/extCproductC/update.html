@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>新增文档 - 光年(Light Year Admin V4)后台管理系统模板</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <meta name="keywords" content="LightYear,LightYearAdmin,光年,后台模板,后台管理系统,光年HTML模板">
+    <meta name="description" content="Light Year Admin V4是一个后台管理系统的HTML模板，基于Bootstrap v4.4.1。">
+    <meta name="author" content="yinqi">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/materialdesignicons.min.css" rel="stylesheet">
+    <!--标签插件-->
+    <link rel="stylesheet" href="/static/js/jquery-tagsinput/jquery.tagsinput.min.css">
+    <link href="/static/css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container-fluid p-t-15">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <form action="/extCproductC/update" method="post" class="row">
+                        <div class="form-group col-md-12">
+                            <label for="extCproductId">ID</label>
+                            <input type="text" readonly="readonly" class="form-control" id="extCproductId" name="extCproductId"
+                                   th:value="${extCproductCById.extCproductId}"/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="extCproductId">货物</label>
+                            <input type="hidden" readonly="readonly" class="form-control" id="contractProductId" name="contractProductId"
+                                   th:value="${extCproductCById.contractProductId}"/>
+                        </div>
+                            <div class="form-group col-md-12">
+                                <label >厂家名称</label>
+                                <select name="factoryId">
+                                    <option th:each="startUsing : ${startUsing}" th:value="${startUsing.factoryId}" th:text="${startUsing.fullName}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label >分类</label>
+                                <select name="cType">
+                                    <option th:each="findAll : ${findAll}" th:value="${findAll.cType}" th:text="${findAll.cType}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="seo_keywords">货号</label>
+                                <input type="text" class="form-control" id="seo_keywords" name="productNo" th:value="${extCproductCById.productNo}"  />
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="productImage">货物照片</label>
+                                <input type="text" class="form-control" name="productImage" id="productImage"  th:value="${extCproductCById.productImage}">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="cnumber">数量</label>
+                                <input type="text" class="form-control" id="cnumber" name="cnumber" th:value="${extCproductCById.cnumber}" />
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="packingUnit">包装单位</label>
+                                <input type="text"  name="packingUnit" id="packingUnit" th:value="${extCproductCById.packingUnit}"/>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="price">单价</label>
+                                <input type="text" class="form-control" name="price" id="price" th:value="${extCproductCById.price}"/>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="orderNo">排序号</label>
+                                <input type="text" class="form-control" id="orderNo" name="orderNo"  th:value="${extCproductCById.orderNo}"/>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="productDesc">货物描述</label>
+                                <input type="text" class="form-control" id="productDesc" name="productDesc"  th:value="${extCproductCById.productDesc}"/>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label >要求</label>
+                                <input type="text" class="form-control" id="" name=""  th:value="要求"/>
+                                <!--<input type="text" class="form-control" name="boxNum" id="boxNum"  placeholder="箱数">-->
+                            </div>
+                            <div class="form-group col-md-12">
+                                <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
+                                <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/perfect-scrollbar.min.js"></script>
+<!--标签插件-->
+<script src="/static/js/jquery-tagsinput/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="/static/js/main.min.js"></script>
+</body>
+</html>

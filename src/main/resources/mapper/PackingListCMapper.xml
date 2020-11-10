@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deer.managementPlatform.dao.PackingListCMapper">
+    <resultMap type="com.deer.managementPlatform.entity.PackingListC" id="packingListRM">
+        <id property="packingListId" column="PACKING_LIST_ID" jdbcType="VARCHAR"/>
+        <result property="seller" column="SELLER" jdbcType="VARCHAR"/>
+        <result property="buyer" column="BUYER" jdbcType="VARCHAR"/>
+        <result property="invoiceNo" column="INVOICE_NO" jdbcType="VARCHAR"/>
+        <result property="invoiceDate" column="INVOICE_DATE" jdbcType="TIMESTAMP"/>
+        <result property="marks" column="MARKS" jdbcType="VARCHAR"/>
+        <result property="descriptions" column="DESCRIPTIONS" jdbcType="VARCHAR"/>
+
+        <result property="exportIds" column="EXPORT_IDS" jdbcType="VARCHAR"/>
+        <result property="exportNos" column="EXPORT_NOS" jdbcType="VARCHAR"/>
+
+        <result property="state" column="STATE" jdbcType="INTEGER"/>
+        <result property="createBy" column="CREATE_BY" jdbcType="VARCHAR"/>
+        <result property="createDept" column="CREATE_DEPT" jdbcType="VARCHAR"/>
+        <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="find" parameterType="map" resultMap="packingListRM">
+        select * from packing_list_c
+        where 1=1
+    </select>
+    <!-- 添加 -->
+    <insert id="insert" parameterType="com.deer.managementPlatform.entity.PackingListC">
+        insert into packing_list_c
+        (PACKING_LIST_ID,EXPORT_ID,SELLER,BUYER,INVOICE_NO,INVOICE_DATE,MARKS,DESCRIPTIONS)
+        values
+        (
+            #{packingListId},
+            #{exportId},
+            #{seller},
+            #{buyer},
+            #{invoiceNo},
+            #{invoiceDate},
+            #{marks},
+            #{descriptions}
+        )
+    </insert>
+    <select id="selcteById" parameterType="string" resultMap="packingListRM">
+        select * from packing_list_c
+        where packing_list_id=#{packingListId}
+    </select>
+    <!--修改-->
+    <update id="update" parameterType="com.deer.managementPlatform.entity.PackingListC">
+        update packing_list_c
+        <set>
+            <if test="seller != null">SELLER=#{seller},</if>
+            <if test="buyer != null">BUYER=#{buyer},</if>
+            <if test="invoiceNo != null">INVOICE_NO=#{invoiceNo},</if>
+            <if test="invoiceDate != null">INVOICE_DATE=#{invoiceDate},</if>
+            <if test="marks != null">MARKS=#{marks},</if>
+            <if test="descriptions != null">DESCRIPTIONS=#{descriptions},</if>
+            <if test="exportIds != null">EXPORT_ID=#{exportId},</if>
+        </set>
+        where packing_list_id=#{packingListId}
+    </update>
+
+</mapper>

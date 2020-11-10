@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deer.managementPlatform.dao.ContractCMapper">
+    <resultMap id="ContractC" type="com.deer.managementPlatform.entity.ContractC">
+            <id column="contractId" property="contractId" />
+            <!--<result column="contractProducts" property="contractProducts" jdbcType="OTHER"/>-->
+            <result column="offeror" property="offeror" jdbcType="VARCHAR"/>
+            <result column="contractNo"  property="contractNo" jdbcType="VARCHAR"/>
+            <result column="signingDate" property="signingDate" jdbcType="TIMESTAMP"/>
+            <result column="inputBy" property="inputBy" jdbcType="VARCHAR"/>
+            <result column="checkBy" property="checkBy" jdbcType="VARCHAR"/>
+            <result column="inspector" property="inspector" jdbcType="VARCHAR"/>
+            <result column="totalAmount" property="totalAmount" jdbcType="FLOAT"/>
+            <result column="request" property="request" jdbcType="VARCHAR"/>
+            <result column="customName" property="customName" jdbcType="VARCHAR"/>
+            <result column="shipTime" property="shipTime" jdbcType="TIMESTAMP"/>
+            <result column="importNum" property="importNum" jdbcType="VARCHAR"/>
+            <result column="deliveryPeriod" property="deliveryPeriod"  jdbcType="TIMESTAMP"/>
+            <result column="remark" property="remark" jdbcType="VARCHAR"/>
+            <result column="printStyle" property="printStyle" jdbcType="VARCHAR"/>
+            <result column="oldState" property="oldState" jdbcType="INTEGER"/>
+            <result column="state" property="state" jdbcType="INTEGER"/>
+            <result column="outState" property="outState" jdbcType="INTEGER"/>
+            <result column="createBy" property="createBy" jdbcType="VARCHAR"/>
+            <result column="createDept" property="createDept" jdbcType="VARCHAR"/>
+            <result column="createTime" property="createTime" jdbcType="TIMESTAMP"/>
+            <result column="extnum" property="extnum" jdbcType="VARCHAR"/>
+            <result column="cpnum" property="cpnum" jdbcType="VARCHAR"/>
+            <result column="total_amount" property="total_amount" jdbcType="VARCHAR"/>
+
+        </resultMap>
+        <select id="findAll" resultMap="ContractC">
+            select
+                (select count(*) from contract_product_c
+                 where contract_id=c.contract_id)  as cpnum,
+                (select count(*) from ext_cproduct_c
+                 where contract_product_id in (select contract_product_id from contract_product_c where contract_id=c.contract_id)
+                ) as extnum,
+                (
+                        nvl((select sum(cnumber*price) as cptotal from contract_product_c
+                             where contract_id =c.contract_id),0)
+                        +
+                        nvl(
+                                (select sum(cnumber*price) as exttotal from ext_cproduct_c
+                                 where contract_product_id in (select contract_product_id from contract_product_c where contract_id=c.contract_id))
+                            ,0)
+                    ) as total_amount,
+                c.CONTRACT_ID,c.OFFEROR,c.CONTRACT_NO,c.SIGNING_DATE,c.INPUT_BY,c.CHECK_BY,c.INSPECTOR,c.IMPORT_NUM,c.CUSTOM_NAME,c.DELIVERY_PERIOD,c.SHIP_TIME,c.REMARK,c.PRINT_STYLE,c.OLD_STATE,c.STATE,c.OUT_STATE
+
+            from contract_c c
+
+        </select>
+        <insert id="add">
+            insert into CONTRACT_C(CONTRACT_ID,CUSTOM_NAME, OFFEROR, CONTRACT_NO, PRINT_STYLE, SIGNING_DATE, IMPORT_NUM, DELIVERY_PERIOD, SHIP_TIME, INSPECTOR, INPUT_BY, CHECK_BY, REQUEST, REMARK,STATE)
+            VALUES (#{contractId},#{customName},#{offeror},#{contractNo},#{printStyle},#{signingDate},#{importNum},#{deliveryPeriod},#{shipTime},#{inspector},#{inputBy},#{checkBy},#{request},#{remark},#{state})
+        </insert>
+        <update id="update">
+            update CONTRACT_C
+            set CUSTOM_NAME=#{customName},OFFEROR=#{offeror}, CONTRACT_NO=#{contractNo}, PRINT_STYLE=#{printStyle}, SIGNING_DATE=#{signingDate}, IMPORT_NUM=#{importNum}, DELIVERY_PERIOD=#{deliveryPeriod}, SHIP_TIME=#{shipTime}, INSPECTOR=#{inspector}, INPUT_BY=#{inputBy}, CHECK_BY=#{checkBy}, REQUEST=#{request}, REMARK=#{remark}
+            where CONTRACT_ID=#{contractId}
+        </update>
+        <select id="findById" resultMap="ContractC">
+            select CONTRACT_ID, CUSTOM_NAME, OFFEROR, CONTRACT_NO, PRINT_STYLE, SIGNING_DATE, IMPORT_NUM, DELIVERY_PERIOD, SHIP_TIME, INSPECTOR, INPUT_BY, CHECK_BY, REQUEST, REMARK
+            from CONTRACT_C
+            where CONTRACT_ID=#{contractId}
+        </select>
+        <delete id="deleteById">
+            delete from CONTRACT_C where CONTRACT_ID=#{contractId}
+        </delete>
+    <!--上报-->
+    <update id="toStartUsing">
+            update CONTRACT_C set STATE=3 where CONTRACT_ID=#{contractId}
+        </update>
+    <update id="toStopUsing">
+            update CONTRACT_C set STATE=1 where CONTRACT_ID=#{contractId}
+        </update>
+    <delete id="deleteall">
+        delete from CONTRACT_C where CONTRACT_ID in
+        <foreach open="(" collection="ids" item="contractId"  separator="," close=")">#{contractId}</foreach>
+    </delete>
+    <!--
+    <delete id="deleteall">
+        delete from FACTORY_C where FACTORY_ID in
+        <foreach open="(" collection="ids" item="factoryId"  separator="," close=")">#{factoryId}</foreach>
+    </delete>
+    -->
+    <delete id="deleteByContractId">
+       delete from CONTRACT_C where CONTRACT_ID in
+       <foreach open="(" collection="id" item="id"  separator="," close=")">#{id}</foreach>
+    </delete>
+    <select id="view"  resultMap="ContractC">
+        <!-- select * from CONTRACT_C c where CONTRACT_ID = #{contractId} -->
+        select
+        c.contract_id,c.offeror,c.contract_no,c.signing_date,c.input_by,c.check_by,c.inspector,c.total_amount,c.import_num,c.custom_name,c.delivery_period,c.ship_time,c.remark,c.print_style,c.old_state,c.state,c.out_state,c.create_by,c.create_dept,c.create_time,
+
+        t.contract_product_id,
+        t.product_no,t.product_image,t.product_desc,t.cnumber,t.out_number,t.loading_rate,t.box_num,t.packing_unit,t.price,t.amount,t.finished,t.order_no,
+        t.factory_id,t.full_name,t.factory_name,t.phone,
+
+        t.ext_cproduct_id,
+        t.ctype,t.ext_product_no,t.ext_product_image,t.ext_product_desc,t.ext_cnumber,t.ext_packing_unit,t.ext_price,t.ext_amount,t.product_request,
+        t.ext_order_no,
+        t.ext_factory_id,t.ext_full_name,t.ext_factory_name,t.ext_phone
+
+        from
+        (
+        select
+        contract_id,offeror,contract_no,signing_date,input_by,check_by,inspector,total_amount,import_num,custom_name,delivery_period,ship_time,remark,print_style,old_state,state,out_state,create_by,create_dept,create_time
+        from contract_c
+        ) c
+        left join
+        (
+        select
+        cp.contract_product_id,cp.contract_id,
+        cp.product_no,cp.product_image,cp.product_desc,cp.cnumber,cp.out_number,cp.loading_rate,cp.box_num,cp.packing_unit,cp.price,cp.amount,cp.finished,cp.order_no,
+        cp.factory_id,cp.full_name,cp.factory_name,cp.phone,
+
+        ext.ext_cproduct_id,
+        ext.ctype,ext.product_no as ext_product_no,ext.product_image as ext_product_image,ext.product_desc as ext_product_desc,
+        ext.cnumber as ext_cnumber,ext.packing_unit as ext_packing_unit,ext.price as ext_price,ext.amount as ext_amount,
+        ext.product_request,ext.order_no as ext_order_no,
+        ext.factory_id as ext_factory_id,ext.full_name as ext_full_name,ext.factory_name as ext_factory_name ,ext.phone as ext_phone
+
+        from
+        (
+        select
+        cp.contract_product_id,cp.contract_id,
+        cp.product_no,cp.product_image,cp.product_desc,cp.cnumber,cp.out_number,cp.loading_rate,cp.box_num,cp.packing_unit,cp.price,cp.amount,cp.finished,cp.order_no,
+        f.factory_id,f.full_name,f.factory_name,f.phone
+        from
+        (select
+        contract_product_id,contract_id,factory_id,
+        product_no,product_image,product_desc,cnumber,out_number,loading_rate,box_num,packing_unit,price,amount,finished,order_no
+        from contract_product_c) cp
+        left join
+        (select factory_id,full_name,factory_name,phone from factory_c) f
+        on cp.factory_id=f.factory_id
+        ) cp
+        left join
+        (
+        select
+        ext.ext_cproduct_id,ext.contract_product_id,
+        ext.ctype,ext.product_no,ext.product_image,ext.product_desc,ext.cnumber,ext.packing_unit,ext.price,ext.amount,ext.product_request,ext.order_no,
+        f.factory_id,f.full_name,f.factory_name,f.phone
+        from
+        (
+        select
+        ext_cproduct_id,contract_product_id,factory_id,
+        ctype,product_no,product_image,product_desc,cnumber,packing_unit,price,amount,product_request,order_no
+        from ext_cproduct_c
+        ) ext
+        left join
+        (select factory_id,full_name,factory_name,phone from factory_c) f
+        on ext.factory_id=f.factory_id
+        ) ext
+        on cp.contract_product_id=ext.contract_product_id
+        ) t
+        on c.contract_id=t.contract_id
+
+        where c.contract_id=#{contractId}
+    </select>
+   <!-- <select id="startUsing" resultMap="ContractC">
+            select CONTRACT_ID, FULL_NAME, FACTORY_NAME, CONTACTOR, PHONE, MOBILE, FAX, CNOTE, CTYPE, STATE, INSPECTOR, ORDER_NO, CREATE_BY, CREATE_DEPT, CREATE_TIME
+            from FACTORY_C
+            where STATE=1
+        </select>
+    <select id="stopUsing" resultMap="ContractC">
+            select CONTRACT_ID, FULL_NAME, FACTORY_NAME, CONTACTOR, PHONE, MOBILE, FAX, CNOTE, CTYPE, STATE, INSPECTOR, ORDER_NO, CREATE_BY, CREATE_DEPT, CREATE_TIME
+            from FACTORY_C
+            where STATE=2
+        </select>-->
+         <!--<foreach>
+                collection:必填 值为循环属性名
+                item 变量名，值为循环中的每一个 与动态获取值一致
+                index：缩阴属性名，在集合数组情况下只为当前索引值，当循环对象为map型，为map的key值
+                open:整个循环内容开头的字符串
+                close：整个循环内容结尾的字符串
+                separator：每次循环的分隔符-->
+
+    <update id="updateState" parameterType="map">
+            update CONTRACT_C set STATE = #{state} where CONTRACT_ID in
+            <foreach open="(" collection="ids" item="contractId"  separator="," close=")">#{contractId} </foreach>
+        </update>
+
+</mapper>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deer.managementPlatform.dao.ExtCproductCMapper">
+    <resultMap type="com.deer.managementPlatform.entity.ExtCproductC" id="ExtCproductCMap">
+    <result property="extCproductId" column="EXT_CPRODUCT_ID" jdbcType="VARCHAR"/>
+    <result property="factoryId" column="FACTORY_ID" jdbcType="VARCHAR"/>
+    <result property="contractProductId" column="CONTRACT_PRODUCT_ID" jdbcType="VARCHAR"/>
+    <result property="ctype" column="CTYPE" jdbcType="INTEGER"/>
+    <result property="productName" column="PRODUCT_NAME" jdbcType="VARCHAR"/>
+    <result property="productNo" column="PRODUCT_NO" jdbcType="VARCHAR"/>
+    <result property="productImage" column="PRODUCT_IMAGE" jdbcType="VARCHAR"/>
+    <result property="productDesc" column="PRODUCT_DESC" jdbcType="VARCHAR"/>
+    <result property="loadingRate" column="LOADING_RATE" jdbcType="VARCHAR"/>
+    <result property="packingUnit" column="PACKING_UNIT" jdbcType="VARCHAR"/>
+    <result property="cnumber" column="CNUMBER" jdbcType="INTEGER"/>
+    <result property="outNumber" column="OUT_NUMBER" jdbcType="INTEGER"/>
+    <result property="finished" column="FINISHED" jdbcType="VARCHAR"/>
+    <result property="grossWeight" column="GROSS_WEIGHT" jdbcType="NUMERIC"/>
+    <result property="netWeight" column="NET_WEIGHT" jdbcType="NUMERIC"/>
+    <result property="sizeLenght" column="SIZE_LENGHT" jdbcType="NUMERIC"/>
+    <result property="sizeWidth" column="SIZE_WIDTH" jdbcType="NUMERIC"/>
+    <result property="sizeHeight" column="SIZE_HEIGHT" jdbcType="NUMERIC"/>
+    <result property="productRequest" column="PRODUCT_REQUEST" jdbcType="VARCHAR"/>
+    <result property="factory" column="FACTORY" jdbcType="VARCHAR"/>
+    <result property="price" column="PRICE" jdbcType="NUMERIC"/>
+    <result property="amount" column="AMOUNT" jdbcType="NUMERIC"/>
+    <result property="cunit" column="CUNIT" jdbcType="VARCHAR"/>
+    <result property="boxNum" column="BOX_NUM" jdbcType="INTEGER"/>
+    <result property="exPrice" column="EX_PRICE" jdbcType="NUMERIC"/>
+    <result property="exUnit" column="EX_UNIT" jdbcType="VARCHAR"/>
+    <result property="noTax" column="NO_TAX" jdbcType="NUMERIC"/>
+    <result property="tax" column="TAX" jdbcType="NUMERIC"/>
+    <result property="costPrice" column="COST_PRICE" jdbcType="NUMERIC"/>
+    <result property="costTax" column="COST_TAX" jdbcType="NUMERIC"/>
+    <result property="accessories" column="ACCESSORIES" jdbcType="VARCHAR"/>
+    <result property="orderNo" column="ORDER_NO" jdbcType="INTEGER"/>
+    <association property="factoryC" javaType="com.deer.managementPlatform.entity.FactoryC">
+        <result property="factoryId" column="FACTORY_ID" jdbcType="VARCHAR"/>
+        <result property="fullName" column="FULL_NAME" jdbcType="VARCHAR"/>
+        <result property="factoryName" column="FACTORY_NAME" jdbcType="VARCHAR"/>
+        <result property="contactor" column="CONTACTOR" jdbcType="VARCHAR"/>
+        <result property="phone" column="PHONE" jdbcType="VARCHAR"/>
+        <result property="mobile" column="MOBILE" jdbcType="VARCHAR"/>
+        <result property="fax" column="FAX" jdbcType="VARCHAR"/>
+        <result property="cNote" column="CNOTE" jdbcType="VARCHAR"/>
+        <result property="cType" column="CTYPE" jdbcType="INTEGER"/>
+        <result property="state" column="STATE" jdbcType="VARCHAR"/>
+        <result property="inspector" column="INSPECTOR" jdbcType="VARCHAR"/>
+        <result property="orderNo" column="ORDER_NO" jdbcType="INTEGER"/>
+        <result property="createBy" column="CREATE_BY" jdbcType="VARCHAR"/>
+        <result property="createDept" column="CREATE_DEPT" jdbcType="VARCHAR"/>
+        <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
+    </association>
+    <association property="contractProductC" javaType="com.deer.managementPlatform.entity.ContractProductC">
+        <id property="contractProductId" column="CONTRACT_PRODUCT_ID" jdbcType="VARCHAR"/>
+        <result property="contractId" column="CONTRACT_ID" jdbcType="VARCHAR"/>
+        <result property="factoryId" column="FACTORY_ID" jdbcType="VARCHAR"/>
+        <result property="productName" column="PRODUCT_NAME" jdbcType="VARCHAR"/>
+        <result property="productNo" column="PRODUCT_NO" jdbcType="VARCHAR"/>
+        <result property="productImage" column="PRODUCT_IMAGE" jdbcType="VARCHAR"/>
+        <result property="productDesc" column="PRODUCT_DESC" jdbcType="VARCHAR"/>
+        <result property="loadingRate" column="LOADING_RATE" jdbcType="VARCHAR"/>
+        <result property="packingUnit" column="PACKING_UNIT" jdbcType="VARCHAR"/>
+        <result property="cnumber" column="CNUMBER" jdbcType="INTEGER"/>
+        <result property="outNumber" column="OUT_NUMBER" jdbcType="INTEGER"/>
+        <result property="finished" column="FINISHED" jdbcType="VARCHAR"/>
+        <result property="grossWeight" column="GROSS_WEIGHT" jdbcType="NUMERIC"/>
+        <result property="netWeight" column="NET_WEIGHT" jdbcType="NUMERIC"/>
+        <result property="sizeLenght" column="SIZE_LENGHT" jdbcType="NUMERIC"/>
+        <result property="sizeWidth" column="SIZE_WIDTH" jdbcType="NUMERIC"/>
+        <result property="sizeHeight" column="SIZE_HEIGHT" jdbcType="NUMERIC"/>
+        <result property="productRequest" column="PRODUCT_REQUEST" jdbcType="VARCHAR"/>
+        <result property="factory" column="FACTORY" jdbcType="VARCHAR"/>
+        <result property="price" column="PRICE" jdbcType="NUMERIC"/>
+        <result property="amount" column="AMOUNT" jdbcType="NUMERIC"/>
+        <result property="cunit" column="CUNIT" jdbcType="VARCHAR"/>
+        <result property="boxNum" column="BOX_NUM" jdbcType="INTEGER"/>
+        <result property="exPrice" column="EX_PRICE" jdbcType="NUMERIC"/>
+        <result property="exUnit" column="EX_UNIT" jdbcType="NUMERIC"/>
+        <result property="noTax" column="NO_TAX" jdbcType="NUMERIC"/>
+        <result property="tax" column="TAX" jdbcType="NUMERIC"/>
+        <result property="costPrice" column="COST_PRICE" jdbcType="NUMERIC"/>
+        <result property="costTax" column="COST_TAX" jdbcType="NUMERIC"/>
+        <result property="accessories" column="ACCESSORIES" jdbcType="VARCHAR"/>
+        <result property="orderNo" column="ORDER_NO" jdbcType="INTEGER"/>
+    </association>
+</resultMap>
+    <select id="findAll" resultMap="ExtCproductCMap">
+        select *
+        from EXT_CPRODUCT_C e,FACTORY_C f,CONTRACT_PRODUCT_C c
+        where e.FACTORY_ID= f.FACTORY_ID and e.CONTRACT_PRODUCT_ID = c.CONTRACT_PRODUCT_ID and e.CONTRACT_PRODUCT_ID = #{contractProductId}
+    </select>
+    <insert id="add" parameterType="com.deer.managementPlatform.entity.ExtCproductC">
+        insert into EXT_CPRODUCT_C(EXT_CPRODUCT_ID,CONTRACT_PRODUCT_ID,FACTORY_ID, PRODUCT_NO,PRODUCT_IMAGE,CNUMBER,PACKING_UNIT,PRICE,ORDER_NO,PRODUCT_DESC)
+        values (#{extCproductId},#{contractProductId},#{factoryId}, #{productNo},#{productImage},#{cnumber},#{packingUnit},#{price},#{orderNo},#{productDesc})
+    </insert>
+    <update id="update">
+        update EXT_CPRODUCT_C
+        set FACTORY_ID=#{factoryId},CONTRACT_PRODUCT_ID=#{contractProductId},PRODUCT_NO=#{productNo}, PRODUCT_DESC=#{productDesc},PACKING_UNIT=#{packingUnit},CNUMBER=#{cnumber}, PRICE=#{price}, ORDER_NO=#{orderNo}, PRODUCT_IMAGE=#{productImage}
+        where EXT_CPRODUCT_ID=#{extCproductId}
+    </update>
+    <delete id="deleteById">
+        delete from EXT_CPRODUCT_C where EXT_CPRODUCT_ID = #{extCproductId}
+    </delete>
+    <select id="findById" resultMap="ExtCproductCMap">
+        select
+            EXT_CPRODUCT_ID,CONTRACT_PRODUCT_ID,FACTORY_ID, PRODUCT_NO,PRODUCT_IMAGE,CNUMBER,PACKING_UNIT,PRICE,ORDER_NO,PRODUCT_DESC
+        from EXT_CPRODUCT_C
+        where EXT_CPRODUCT_ID = #{extCproductId}
+    </select>
+    <delete id="deleteByProduct">
+        delete from ext_cproduct_c
+        where CONTRACT_PRODUCT_ID in
+        (
+        select contract_product_id from contract_product_c
+        where contract_id in
+        <foreach collection="id" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        )
+
+    </delete>
+</mapper>

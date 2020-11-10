@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>新增文档 - 光年(Light Year Admin V4)后台管理系统模板</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <meta name="keywords" content="LightYear,LightYearAdmin,光年,后台模板,后台管理系统,光年HTML模板">
+    <meta name="description" content="Light Year Admin V4是一个后台管理系统的HTML模板，基于Bootstrap v4.4.1。">
+    <meta name="author" content="yinqi">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/materialdesignicons.min.css" rel="stylesheet">
+    <!--标签插件-->
+    <link rel="stylesheet" href="/static/js/jquery-tagsinput/jquery.tagsinput.min.css">
+    <link href="/static/css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container-fluid p-t-15">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <form action="/contractC/update" method="post" class="row">
+                        <div class="form-group col-md-12">
+                            <label for="contractId">ID</label>
+                            <input type="text" readonly="readonly" class="form-control" id="contractId" name="contractId"
+                                   th:value="${contractCById.contractId}"/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="type">客户名称</label>
+                            <input type="text" class="form-control" id="type" name="customName"
+                                   th:value="${contractCById.customName}"/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="title">收购方</label>
+                            <input type="text" class="form-control" id="title" name="offeror"
+                                   th:value="${contractCById.offeror}"/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="seo_keywords">合同号</label>
+                            <input type="text" class="form-control" id="seo_keywords" name="contractNo"
+                                   th:value="${contractCById.contractNo}"/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="seo_description">打印版式</label>
+                            <input type="text" class="form-control" id="seo_description" name="printStyle" rows="5"
+                                   th:value="${contractCById.printStyle}"/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="signingDate">签单日期</label>
+                            <input type="date" class="form-control" name="signingDate" id="signingDate"
+                                   th:value="${contractCById.signingDate}">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="importNum">重要程度</label>
+                            <input type="text" class="form-control" name="importNum" id="importNum"
+                                   th:value="${contractCById.importNum}">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="deliveryPeriod">交货期限</label>
+                            <input type="date" class="form-control" name="deliveryPeriod" id="deliveryPeriod"
+                                   th:value="${contractCById.deliveryPeriod}">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="shipTime">船期</label>
+                            <input type="date" class="form-control" name="shipTime" id="shipTime"
+                                   th:value="${contractCById.shipTime}">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="inspector">验货员</label>
+                            <input type="text" class="form-control" id="inspector" name="inspector"
+                                   th:value="${contractCById.inspector}">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="inputBy">制单人</label>
+                            <input type="text" class="form-control" id="inputBy" name="inputBy"
+                                   th:value="${contractCById.inputBy}">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="checkBy">审单人</label>
+                            <input type="text" class="form-control" id="checkBy" name="checkBy"
+                                   th:value="${contractCById.checkBy}">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="request">要求</label>
+                            <input type="text" class="form-control" id="request" name="request"
+                                   th:value="${contractCById.request}">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="remark">说明</label>
+                            <input type="text" class="form-control" id="remark" name="remark"
+                                   th:value="${contractCById.remark}">
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
+                            <button type="button" class="btn btn-default"
+                                    onclick="javascript:history.back(-1);return false;">返 回
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/perfect-scrollbar.min.js"></script>
+<!--标签插件-->
+<script src="/static/js/jquery-tagsinput/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="/static/js/main.min.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>新增文档 - 光年(Light Year Admin V4)后台管理系统模板</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <meta name="keywords" content="LightYear,LightYearAdmin,光年,后台模板,后台管理系统,光年HTML模板">
+    <meta name="description" content="Light Year Admin V4是一个后台管理系统的HTML模板，基于Bootstrap v4.4.1。">
+    <meta name="author" content="yinqi">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/materialdesignicons.min.css" rel="stylesheet">
+    <!--标签插件-->
+    <link rel="stylesheet" href="/static/js/jquery-tagsinput/jquery.tagsinput.min.css">
+    <link href="/static/css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container-fluid p-t-15">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <form action="/packingListC/insert"  method="post" class="row ajax-post">
+                        <div class="form-group col-md-12">
+                            <label for="type">卖方：</label>
+                            <input type="text" class="form-control" id="type" name="seller" th:value="${packingListC.seller}"/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="title">买方：</label>
+                            <input type="text" class="form-control" id="title" name="buyer" th:value="${packingListC.buyer}"/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="seo_keywords">发票号：</label>
+                            <input type="text" class="form-control" id="seo_keywords" name="invoiceNo" th:value="${packingListC.invoiceNo}"/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="signingDate">发票日期：</label>
+                            <input type="date" class="form-control" name="invoiceDate" id="signingDate" th:value="${packingListC.invoiceDate}">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="deliveryPeriod">唛头：</label>
+                            <input type="text" class="form-control" name="marks" id="deliveryPeriod" th:value="${packingListC.marks}">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="shipTime">描述：</label>
+                            <input type="text" class="form-control" name="descriptions" id="shipTime" th:value="${packingListC.descriptions}">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="shipTime">id：</label>
+                            <input type="text" class="form-control" name="exportId" id="shipTime" th:value="${packingListC.exportId}">
+                        </div>
+                        <div>报运信息</div>
+                        <div id="divData">
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
+                            <button type="button" class="btn btn-default"
+                                    onclick="javascript:history.back(-1);return false;">返 回
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/perfect-scrollbar.min.js"></script>
+<!--标签插件-->
+<script src="/static/js/jquery-tagsinput/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="/static/js/main.min.js"></script>
+<script>
+    $(function(){
+        $.ajax({
+            url: '/packingListC/getDivData',
+            type: 'post',
+            success: function (data){
+                if(data != "error"){
+                    $('#divData').html(data);
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

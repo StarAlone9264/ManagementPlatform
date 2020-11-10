@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deer.managementPlatform.dao.FactoryCMapper">
+    <resultMap id="Factory" type="com.deer.managementPlatform.entity.FactoryC">
+        <id column="factoryId" property="factoryId"/>
+        <result column="fullName" property="fullName"/>
+        <result column="factoryName"  property="factoryName"/>
+        <result column="contactor" property="contactor"/>
+        <result column="phone" property="phone"/>
+        <result column="mobile" property="mobile"/>
+        <result column="fax" property="fax"/>
+        <result column="cNote" property="cNote"/>
+        <result column="cType" property="cType"/>
+        <result column="state" property="state"/>
+        <result column="inspector" property="inspector"/>
+        <result column="orderNo" property="orderNo"/>
+        <result column="createBy" property="createBy"/>
+        <result column="createDept" property="createDept"/>
+        <result column="createTime" property="createTime"/>
+    </resultMap>
+    <select id="findAll" resultMap="Factory">
+        select FACTORY_ID, FULL_NAME, FACTORY_NAME, CONTACTOR, PHONE, MOBILE, FAX, CNOTE, CTYPE, STATE, INSPECTOR, ORDER_NO, CREATE_BY, CREATE_DEPT, CREATE_TIME from FACTORY_C
+
+    </select>
+    <insert id="add">
+        insert into FACTORY_C(factory_id, full_name, factory_name, contactor, phone, mobile, fax, cnote, ctype, state, inspector, order_no, create_by, create_dept, create_time)
+        VALUES (#{factoryId},#{fullName},#{factoryName},#{contactor},#{phone},#{mobile},#{fax},#{cNote},#{cType},1,#{inspector},#{orderNo},'admin','采购部',sysdate)
+
+    </insert>
+    <update id="update">
+        update FACTORY_C
+        set FULL_NAME=#{fullName} , FACTORY_NAME=#{factoryName} ,CONTACTOR=#{contactor},PHONE=#{phone},MOBILE=#{mobile},FAX=#{fax},CNOTE=#{cNote},CTYPE=null,STATE=1,INSPECTOR=#{inspector},ORDER_NO=#{orderNo},CREATE_BY='admin',CREATE_DEPT='采购部',CREATE_TIME=sysdate
+        where FACTORY_ID=#{factoryId}
+    </update>
+    <select id="findById" resultMap="Factory">
+         select factory_id, full_name, factory_name, contactor, phone, mobile, fax, cnote, ctype, state, inspector, order_no, create_by, create_dept, create_time
+        from FACTORY_C
+        where FACTORY_ID=#{factoryId}
+    </select>
+    <select id="startUsing" resultMap="Factory">
+        select FACTORY_ID, FULL_NAME, FACTORY_NAME, CONTACTOR, PHONE, MOBILE, FAX, CNOTE, CTYPE, STATE, INSPECTOR, ORDER_NO, CREATE_BY, CREATE_DEPT, CREATE_TIME
+        from FACTORY_C
+        where STATE=1
+    </select>
+    <select id="stopUsing" resultMap="Factory">
+        select FACTORY_ID, FULL_NAME, FACTORY_NAME, CONTACTOR, PHONE, MOBILE, FAX, CNOTE, CTYPE, STATE, INSPECTOR, ORDER_NO, CREATE_BY, CREATE_DEPT, CREATE_TIME
+        from FACTORY_C
+        where STATE=2
+    </select>
+    <update id="toStartUsing">
+        update FACTORY_C set STATE=2 where FACTORY_ID=#{factoryId}
+    </update>
+    <update id="toStopUsing">
+        update FACTORY_C set STATE=1 where FACTORY_ID=#{factoryId}
+    </update>
+    <delete id="deleteById">
+        delete from FACTORY_C where FACTORY_ID = #{factoryId}
+    </delete>
+    <delete id="deleteall">
+        delete from FACTORY_C where FACTORY_ID in
+        <foreach open="(" collection="ids" item="factoryId"  separator="," close=")">#{factoryId}</foreach>
+    </delete>
+<!--    <foreach>
+        collection:必填 值为循环属性名
+        item 变量名，值为循环中的每一个 与动态获取值一致
+        index：缩阴属性名，在集合数组情况下只为当前索引值，当循环对象为map型，为map的key值
+        open:整个循环内容开头的字符串
+        close：整个循环内容结尾的字符串
+        separator：每次循环的分隔符
+-->
+    <update id="updateState" parameterType="map">
+    update FACTORY_C set STATE = #{state} where FACTORY_ID in
+    <foreach open="(" collection="ids" item="id"  separator="," close=")">#{id} </foreach>
+</update>
+</mapper>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table align="center" width="1400px">
+    <tr align="center">
+        <th colspan="10">
+            <h3>已停用厂家</h3>
+        </th>
+    </tr>
+    <tr align="center">
+        <td colspan="3">
+            <a href="/factoryC/findAll">主页</a>
+        </td>
+        <td colspan="2">
+            <a href="/factoryC/toAdd">添加</a>
+        </td>
+        <td colspan="2">
+            <a href="/factoryC/stopUsing">已停用</a>
+        </td>
+        <td colspan="2">
+            <a href="/factoryC/startUsing">已启用</a>
+        </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name=""></td>
+        <td>序号</td>
+        <td>厂家全程</td>
+        <td>缩写</td>
+        <td>联系人</td>
+        <td>电话</td>
+        <td>手机</td>
+        <td>传真</td>
+        <td>验货员</td>
+        <td>状态</td>
+        <td>操作</td>
+    </tr>
+    <tr th:each="factoryCList : ${factoryCList}">
+        <td><input type="checkbox" name=""></td>
+        <td th:text="${factoryCList.factoryId}"></td>
+        <td th:text="${factoryCList.fullName}"></td>
+        <td th:text="${factoryCList.factoryName}"></td>
+        <td th:text="${factoryCList.contactor}"></td>
+        <td th:text="${factoryCList.phone}"></td>
+        <td th:text="${factoryCList.mobile}"></td>
+        <td th:text="${factoryCList.fax}"></td>
+        <td th:text="${factoryCList.inspector}"></td>
+        <td th:if="${factoryCList.state}==1" >
+            <a th:href="'/factoryC/toStartUsing/'+${factoryCList.factoryId}">启用</a>
+        </td>
+        <td th:if="${factoryCList.state}==2">
+            <a th:href="'/factoryC/toStopUsing/'+${factoryCList.factoryId}">停用</a>
+        </td>
+        <td>
+            <a th:href="'/factoryC/findById/'+${factoryCList.factoryId}">修改</a>
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>
